@@ -3,6 +3,7 @@
     <to-do-item
       v-for="{ id, title, description, done } in toDos"
       :key="id"
+      :id="id"
       :title="title"
       :description="description"
       :done="done"

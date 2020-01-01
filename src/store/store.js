@@ -21,11 +21,21 @@ export default new Vuex.Store({
     ]
   },
   getters: {
-    getToDos: (state) => state.toDos
+    getToDos: state => state.toDos
   },
   mutations: {
+    setToDoStatus: (state, { id, done }) => {
+      state.toDos = state.toDos.reduce((acc, toDo) => {
+        if (toDo.id === id) toDo.done = done
+        acc.push(toDo)
+        return acc
+      }, [])
+    }
   },
   actions: {
-
+    toggleToDoStatus: ({ commit, getters }, { id, done }) => {
+      console.log('toggling status')
+      commit('setToDoStatus', { id, done: !done })
+    }
   }
 })
