@@ -1,0 +1,30 @@
+//fonts
+$font-family-sans-serif: 'Roboto', sans-serif;
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 700;
+$font-family-base: $font-family-sans-serif;
+
+// Color tool: https://material.io/tools/color/#!/?view.left=0&view.right=1&primary.color=33cccc&secondary.color=31394b&primary.text.color=000000&secondary.text.color=ffffff
+
+// brand colors
+$cyan: #26c6da;
+$dark-cyan: #0095a8;
+$light-cyan: #6ff9ff;
+$white: #eeeeee;
+$black: #0e0e0e;
+$dark-grey: #575756;
+$middle-grey: #c6c6c6;
+$light-grey: #e3e3e3;
+$lightest-grey: #f6f6f6;
+
+// theme
+$primary: $cyan;
+$primary-dark: $dark-cyan;
+$primary-focus: $light-cyan;
+$primary-text: $black;
+$body-background-color: $black;
+$body-text-color: $white;
+$box-border-color: $light-grey;
+$theme-colors: (
+  "header": $primary-dark
+);

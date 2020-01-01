@@ -33,6 +33,7 @@ Basic CRUD (to-do list is a good example)
 Frontend:
 VueJS
 Bootstrap / VueBootstrap
+Fontawesome: https://github.com/FortAwesome/vue-fontawesome
 
 Backend:
 NodeJS/ExpressJS

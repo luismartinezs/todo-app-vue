@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- <font-awesome-icon icon="user-secret" /> -->
     <the-header />
     <to-do-list />
   </div>
@@ -18,9 +19,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import './styles/variables.scss';
+
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: $font-family-base;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
