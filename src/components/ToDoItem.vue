@@ -2,8 +2,12 @@
   <li
     class="d-flex align-items-center justify-content-between border shadow-sm pl-4 pr-1 py-3 mb-2 w-100 todo"
   >
-    <div class="todo__checkbox mr-4 border border-primary d-flex text-center align-items-center justify-content-center">
-      <font-awesome-icon icon="check" class="text-white"  />
+    <div
+      class="todo__checkbox mr-4 border border-primary d-flex text-center align-items-center justify-content-center"
+      :class="{ 'todo__checkbox--done': done }"
+      @click="handleCheckboxClick"
+    >
+      <font-awesome-icon v-show="done" icon="check" class="text-white" />
     </div>
     <div class="mr-3 todo__content">
       <h2 class="h5 mb-2">{{ title }}</h2>
@@ -27,12 +31,22 @@ export default {
     description: {
       type: String,
       required: true
+    },
+    done: {
+      type: Boolean,
+      required: true
+    }
+  },
+  methods: {
+    handleCheckboxClick () {
+      return null
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/variables.scss";
 $checkbox-size: 44px;
 
 .todo {
@@ -46,6 +60,10 @@ $checkbox-size: 44px;
   height: $checkbox-size;
   width: $checkbox-size;
   border-radius: 50%;
+  background-color: transparent;
+}
+.todo__checkbox--done {
+  background-color: $primary;
 }
 .todo__content {
   flex-basis: 70%;
