@@ -3,7 +3,9 @@
     <!-- <font-awesome-icon icon="user-secret" /> -->
     <the-header />
     <div class="container mt-3">
-    <to-do-list />
+      <div class="d-flex justify-content-center w-100">
+      <to-do-list />
+      </div>
     </div>
   </div>
 </template>
@@ -22,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import './styles/variables.scss';
+@import "./styles/variables.scss";
 
 #app {
   font-family: $font-family-base;

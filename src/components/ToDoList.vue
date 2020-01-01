@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="d-flex flex-column justify-content-center align-items-center w-100">
     <to-do-item
       v-for="{ id, title, description } in toDos"
       :key="id"

@@ -1,11 +1,11 @@
 <template>
-  <div
-    class="d-flex align-items-center justify-content-between border shadow-sm pl-4 pr-1 py-3 mb-2"
+  <li
+    class="d-flex align-items-center justify-content-between border shadow-sm pl-4 pr-1 py-3 mb-2 w-100 todo"
   >
     <div class="todo__checkbox mr-4 border border-primary d-flex text-center align-items-center justify-content-center">
       <font-awesome-icon icon="check" class="text-white"  />
     </div>
-    <div class="todo__content">
+    <div class="mr-3 todo__content">
       <h2 class="h5 mb-2">{{ title }}</h2>
       <p>{{ description }}</p>
     </div>
@@ -13,7 +13,7 @@
       <font-awesome-icon icon="edit" class="mb-2 text-muted" />
       <font-awesome-icon icon="trash-alt" class="text-muted" />
     </div>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -35,6 +35,9 @@ export default {
 <style lang="scss" scoped>
 $checkbox-size: 44px;
 
+.todo {
+  max-width: 700px;
+}
 .todo__checkbox,
 .todo__options {
   width: 50px;
