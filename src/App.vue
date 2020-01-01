@@ -2,7 +2,9 @@
   <div id="app">
     <!-- <font-awesome-icon icon="user-secret" /> -->
     <the-header />
+    <div class="container mt-3">
     <to-do-list />
+    </div>
   </div>
 </template>
 

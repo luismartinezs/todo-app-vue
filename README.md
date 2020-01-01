@@ -28,7 +28,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Planning
 
-Basic CRUD (to-do list is a good example)
+Functionality and purpose: Simple app with CRUD funcionality. The purpose is to test and use technologies.
 
 Frontend:
 VueJS
