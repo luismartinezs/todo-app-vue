@@ -22,7 +22,7 @@
       </b-form-group>
       <div class="d-flex justify-content-end">
         <b-button type="reset" variant="danger" class="mr-1">Cancel</b-button>
-        <b-button type="submit" variant="primary">OK</b-button>
+        <b-button id="okButton" type="submit" variant="primary">OK</b-button>
       </div>
     </b-form>
   </div>

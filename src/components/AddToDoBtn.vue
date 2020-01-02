@@ -1,5 +1,5 @@
 <template>
-  <b-button pill class="mt-2 add-todo-btn" @click="toggleShowAddToDo">
+  <b-button id="addToDoBtn" pill class="mt-2 add-todo-btn" @click="toggleShowAddToDo">
     <span class="h4">+</span>
   </b-button>
 </template>

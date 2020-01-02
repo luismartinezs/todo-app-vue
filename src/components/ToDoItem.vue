@@ -2,30 +2,41 @@
   <li
     class="d-flex align-items-center justify-content-between border shadow-sm pl-4 pr-1 py-3 mb-2 w-100 todo"
   >
-  <div class="w-100 mr-3" :class="{hide: !showEditForm}">
-    <edit-to-do :to-do="toDo" @closeEditToDo="hideEditForm" />
-  </div>
-  <div :class="{hide: showEditForm}" class="d-flex align-items-center justify-content-between w-100">
-    <button
-      class="todo__checkbox mr-4 border border-primary d-flex text-center align-items-center justify-content-center"
-      :class="{ 'todo__checkbox--done': toDo.done }"
-      @click="handleCheckboxClick"
+    <div class="w-100 mr-3" :class="{ hide: !showEditForm }">
+      <edit-to-do :to-do="toDo" @closeEditToDo="hideEditForm" />
+    </div>
+    <div
+      :class="{ hide: showEditForm }"
+      class="d-flex align-items-center justify-content-between w-100"
     >
-      <font-awesome-icon v-show="toDo.done" icon="check" class="text-white" />
-    </button>
-    <div class="mr-3 todo__content">
-      <h2 class="h5 mb-2">{{ toDo.title }}</h2>
-      <p>{{ toDo.description }}</p>
+      <button
+        class="todo__checkbox mr-4 border border-primary d-flex text-center align-items-center justify-content-center"
+        :class="{ 'todo__checkbox--done': toDo.done }"
+        @click="handleCheckboxClick"
+      >
+        <font-awesome-icon
+          v-show="toDo.done"
+          icon="check"
+          class="text-white todo__checkmark"
+        />
+      </button>
+      <div class="mr-3 todo__content">
+        <h2 class="h5 mb-2 to-do__title">{{ toDo.title }}</h2>
+        <p class="to-do__description">{{ toDo.description }}</p>
+      </div>
+      <div class="d-flex flex-column justify-content-center todo__options">
+        <font-awesome-icon
+          @click="handleEdit"
+          icon="edit"
+          class="mb-3 text-muted to-do__btn to-do__edit"
+        />
+        <font-awesome-icon
+          @click="handleDelete"
+          icon="trash-alt"
+          class="text-muted to-do__btn to-do__delete"
+        />
+      </div>
     </div>
-    <div class="d-flex flex-column justify-content-center todo__options">
-      <font-awesome-icon @click="handleEdit" icon="edit" class="mb-3 text-muted to-do__btn" />
-      <font-awesome-icon
-        @click="handleDelete"
-        icon="trash-alt"
-        class="text-muted to-do__btn"
-      />
-    </div>
-  </div>
   </li>
 </template>
 
@@ -100,6 +111,6 @@ $checkbox-size: 44px;
 }
 
 .hide {
-  display: none!important;
+  display: none !important;
 }
 </style>

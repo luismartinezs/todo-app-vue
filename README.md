@@ -54,5 +54,8 @@ https://hashnode.com/post/how-to-test-your-vue-project-with-jest-and-nightwatch-
 ## Next steps
 
 Add e2e tests for the main user cases
+    - Add new todo
+    - Edit an existing todo
+    - Delete a todo
 Setup nodeJs/ExpressJS backend that handles GET, POST and DELETE to DB
 Setup postgresql DB
