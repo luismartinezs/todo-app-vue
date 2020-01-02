@@ -5,24 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    toDos: [
-      {
-        id: 1,
-        title: 'Do the laundry',
-        description: '',
-        done: false
-      },
-      {
-        id: 2,
-        title: 'Study',
-        description: 'Read the biology book and take notes',
-        done: true
-      }
-    ],
+    toDos: [],
     showAddToDo: false
   },
   getters: {
-    getToDos: state => state.toDos
+    getToDos: state => state.toDos,
+    getToDosCount: state => state.toDos.length
   },
   mutations: {
     setToDoStatus: (state, { id, done }) => {
@@ -47,7 +35,10 @@ export default new Vuex.Store({
         if (el.id === toDo.id) acc = index
         return acc
       }, null)
-      state.toDos = state.toDos.slice(0, toDoIndex).concat(toDo).concat(state.toDos.slice(toDoIndex + 1))
+      state.toDos = state.toDos
+        .slice(0, toDoIndex)
+        .concat(toDo)
+        .concat(state.toDos.slice(toDoIndex + 1))
     },
     setDeleteToDo: (state, id) => {
       state.toDos = state.toDos.filter(toDo => toDo.id !== id)

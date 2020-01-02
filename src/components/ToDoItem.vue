@@ -2,10 +2,10 @@
   <li
     class="d-flex align-items-center justify-content-between border shadow-sm pl-4 pr-1 py-3 mb-2 w-100 todo"
   >
-  <div v-show="showEditForm" class="w-100 mr-3">
-    <edit-to-do :to-do="toDo" />
+  <div class="w-100 mr-3" :class="{hide: !showEditForm}">
+    <edit-to-do :to-do="toDo" @closeEditToDo="hideEditForm" />
   </div>
-  <div v-show="!showEditForm" class="d-flex align-items-center justify-content-between w-100">
+  <div :class="{hide: showEditForm}" class="d-flex align-items-center justify-content-between w-100">
     <button
       class="todo__checkbox mr-4 border border-primary d-flex text-center align-items-center justify-content-center"
       :class="{ 'todo__checkbox--done': toDo.done }"
@@ -56,7 +56,10 @@ export default {
       this.deleteToDo(this.toDo.id)
     },
     handleEdit () {
-      this.showEditForm = !this.showEditForm
+      this.showEditForm = true
+    },
+    hideEditForm () {
+      this.showEditForm = false
     }
   }
 }
@@ -94,5 +97,9 @@ $checkbox-size: 44px;
 }
 .to-do__btn {
   cursor: pointer;
+}
+
+.hide {
+  display: none!important;
 }
 </style>

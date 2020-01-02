@@ -7,7 +7,8 @@
         class="d-flex flex-column justify-content-center align-items-center w-100"
       >
         <to-do-list />
-        <div v-show="!showAddToDo">
+        <div v-show="!showAddToDo" class="d-flex flex-column justify-content-center align-items-center">
+          <div v-show="toDosCount === 0">Add a new task</div>
           <add-to-do-btn />
         </div>
         <div class="w-100" v-show="showAddToDo">
@@ -23,7 +24,7 @@ import TheHeader from '@/components/TheHeader.vue'
 import ToDoList from '@/components/ToDoList.vue'
 import AddToDoBtn from '@/components/AddToDoBtn.vue'
 import AddToDo from '@/components/AddToDo.vue'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'app',
@@ -34,7 +35,8 @@ export default {
     AddToDo
   },
   computed: {
-    ...mapState(['showAddToDo'])
+    ...mapState(['showAddToDo']),
+    ...mapGetters({ toDosCount: 'getToDosCount' })
   }
 }
 </script>

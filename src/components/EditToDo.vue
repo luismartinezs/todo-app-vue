@@ -1,21 +1,27 @@
 <template>
-  <div
-    class="d-flex align-items-center justify-content-between w-100"
-  >
+  <div class="d-flex align-items-center justify-content-between w-100">
     <b-form @submit.prevent="onSubmit" @reset.prevent="onReset" class="w-100">
-      <b-form-group :id="`input-group-${toDo.id}-1`" label="Title*:" :label-for="`input-${toDo.id}-1`">
+      <b-form-group
+        :id="`input-group-${toDo.id}-1`"
+        label="Title*:"
+        :label-for="`input-${toDo.id}-1`"
+      >
         <b-form-input
           :id="`input-${toDo.id}-1`"
-          v-model="toDo.title"
+          v-model="currentToDo.title"
           type="text"
           required
           placeholder="Enter title"
         ></b-form-input>
       </b-form-group>
-      <b-form-group :id="`input-group-${toDo.id}-2`" label="Description:" :label-for="`input-${toDo.id}-2`">
+      <b-form-group
+        :id="`input-group-${toDo.id}-2`"
+        label="Description:"
+        :label-for="`input-${toDo.id}-2`"
+      >
         <b-form-input
           :id="`input-${toDo.id}-2`"
-          v-model="toDo.description"
+          v-model="currentToDo.description"
           type="text"
           placeholder="Enter description (optional)"
         ></b-form-input>
@@ -48,19 +54,17 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['toggleShowEditToDo', 'editToDo']),
-    cleanInputs () {
-      this.toDo.title = ''
-      this.toDo.description = ''
-    },
+    ...mapActions(['editToDo']),
     onSubmit (evt) {
-      this.editToDo({ ...this.toDo, title: this.title, description: this.description })
-      this.cleanInputs()
-      this.toggleShowEditToDo()
+      this.editToDo({
+        ...this.toDo,
+        title: this.currentToDo.title,
+        description: this.currentToDo.description
+      })
+      this.$emit('closeEditToDo')
     },
     onReset (evt) {
-      this.cleanInputs()
-      this.toggleShowEditToDo()
+      this.$emit('closeEditToDo')
     }
   }
 }
