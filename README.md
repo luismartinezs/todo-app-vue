@@ -48,5 +48,11 @@ Color scheme monochrome like https://www.nimonikku.com/
 
 Testing:
 Unit tests: jest
-E2e: nightwatch
+E2e: Cypress.io
 https://hashnode.com/post/how-to-test-your-vue-project-with-jest-and-nightwatch-cjskmturk00665ss1gauawb84
+
+## Next steps
+
+Add e2e tests for the main user cases
+Setup nodeJs/ExpressJS backend that handles GET, POST and DELETE to DB
+Setup postgresql DB
