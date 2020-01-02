@@ -2,51 +2,61 @@
   <li
     class="d-flex align-items-center justify-content-between border shadow-sm pl-4 pr-1 py-3 mb-2 w-100 todo"
   >
+  <div v-show="showEditForm" class="w-100 mr-3">
+    <edit-to-do :to-do="toDo" />
+  </div>
+  <div v-show="!showEditForm" class="d-flex align-items-center justify-content-between w-100">
     <button
       class="todo__checkbox mr-4 border border-primary d-flex text-center align-items-center justify-content-center"
-      :class="{ 'todo__checkbox--done': done }"
+      :class="{ 'todo__checkbox--done': toDo.done }"
       @click="handleCheckboxClick"
     >
-      <font-awesome-icon v-show="done" icon="check" class="text-white" />
+      <font-awesome-icon v-show="toDo.done" icon="check" class="text-white" />
     </button>
     <div class="mr-3 todo__content">
-      <h2 class="h5 mb-2">{{ title }}</h2>
-      <p>{{ description }}</p>
+      <h2 class="h5 mb-2">{{ toDo.title }}</h2>
+      <p>{{ toDo.description }}</p>
     </div>
     <div class="d-flex flex-column justify-content-center todo__options">
-      <font-awesome-icon icon="edit" class="mb-2 text-muted" />
-      <font-awesome-icon icon="trash-alt" class="text-muted" />
+      <font-awesome-icon @click="handleEdit" icon="edit" class="mb-3 text-muted to-do__btn" />
+      <font-awesome-icon
+        @click="handleDelete"
+        icon="trash-alt"
+        class="text-muted to-do__btn"
+      />
     </div>
+  </div>
   </li>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import EditToDo from './EditToDo'
 
 export default {
   name: 'ToDoItem',
+  components: { EditToDo },
+  data () {
+    return {
+      showEditForm: false
+    }
+  },
   props: {
-    id: {
-      type: Number,
-      required: true
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    description: {
-      type: String,
-      required: true
-    },
-    done: {
-      type: Boolean,
+    toDo: {
+      type: Object,
       required: true
     }
   },
   methods: {
-    ...mapActions(['toggleToDoStatus']),
+    ...mapActions(['toggleToDoStatus', 'deleteToDo']),
     handleCheckboxClick () {
-      this.toggleToDoStatus({ id: this.id, done: this.done })
+      this.toggleToDoStatus({ id: this.toDo.id, done: this.toDo.done })
+    },
+    handleDelete () {
+      this.deleteToDo(this.toDo.id)
+    },
+    handleEdit () {
+      this.showEditForm = !this.showEditForm
     }
   }
 }
@@ -54,7 +64,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/variables.scss";
-@use "sass:color";
 $checkbox-size: 44px;
 
 .todo {
@@ -71,9 +80,10 @@ $checkbox-size: 44px;
   background-color: transparent;
   transition: all 0.3s;
   box-shadow: none;
-  &:focus {
+  &:focus,
+  &:hover {
     outline: none;
-    box-shadow: 0 0 10px 5px rgba(38,198,218,0.2);
+    box-shadow: 0 0 10px 5px rgba(38, 198, 218, 0.2);
   }
 }
 .todo__checkbox--done {
@@ -81,5 +91,8 @@ $checkbox-size: 44px;
 }
 .todo__content {
   flex-basis: 70%;
+}
+.to-do__btn {
+  cursor: pointer;
 }
 </style>

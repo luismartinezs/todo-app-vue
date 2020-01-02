@@ -3,8 +3,16 @@
     <!-- <font-awesome-icon icon="user-secret" /> -->
     <the-header />
     <div class="container mt-3">
-      <div class="d-flex justify-content-center w-100">
-      <to-do-list />
+      <div
+        class="d-flex flex-column justify-content-center align-items-center w-100"
+      >
+        <to-do-list />
+        <div v-show="!showAddToDo">
+          <add-to-do-btn />
+        </div>
+        <div class="w-100" v-show="showAddToDo">
+          <add-to-do />
+        </div>
       </div>
     </div>
   </div>
@@ -13,12 +21,20 @@
 <script>
 import TheHeader from '@/components/TheHeader.vue'
 import ToDoList from '@/components/ToDoList.vue'
+import AddToDoBtn from '@/components/AddToDoBtn.vue'
+import AddToDo from '@/components/AddToDo.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'app',
   components: {
     TheHeader,
-    ToDoList
+    ToDoList,
+    AddToDoBtn,
+    AddToDo
+  },
+  computed: {
+    ...mapState(['showAddToDo'])
   }
 }
 </script>

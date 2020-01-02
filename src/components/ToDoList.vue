@@ -1,12 +1,9 @@
 <template>
   <ul class="d-flex flex-column justify-content-center align-items-center w-100">
     <to-do-item
-      v-for="{ id, title, description, done } in toDos"
-      :key="id"
-      :id="id"
-      :title="title"
-      :description="description"
-      :done="done"
+      v-for="toDo in toDos"
+      :key="toDo.id"
+      :to-do="toDo"
     />
   </ul>
 </template>
