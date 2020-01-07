@@ -24,7 +24,7 @@ import TheHeader from '@/components/TheHeader.vue'
 import ToDoList from '@/components/ToDoList.vue'
 import AddToDoBtn from '@/components/AddToDoBtn.vue'
 import AddToDo from '@/components/AddToDo.vue'
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'app',
@@ -37,6 +37,12 @@ export default {
   computed: {
     ...mapState(['showAddToDo']),
     ...mapGetters({ toDosCount: 'getToDosCount' })
+  },
+  methods: {
+    ...mapActions(['fetchToDos'])
+  },
+  mounted () {
+    this.fetchToDos()
   }
 }
 </script>

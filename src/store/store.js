@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { getToDos } from '@/services/api'
 
 Vue.use(Vuex)
 
@@ -40,6 +41,7 @@ export default new Vuex.Store({
         .concat(toDo)
         .concat(state.toDos.slice(toDoIndex + 1))
     },
+    setToDos: (state, toDos) => (state.toDos = toDos),
     setDeleteToDo: (state, id) => {
       state.toDos = state.toDos.filter(toDo => toDo.id !== id)
     }
@@ -50,6 +52,14 @@ export default new Vuex.Store({
     },
     toggleShowAddToDo: ({ commit }) => {
       commit('setShowAddToDo')
+    },
+    fetchToDos: async ({ commit }) => {
+      try {
+        const toDos = await getToDos()
+        commit('setToDos', toDos)
+      } catch (err) {
+        console.error(`We couldn't fetch the to-dos. Error: ${err}`)
+      }
     },
     addToDo: ({ commit }, toDo) => {
       commit('setNewToDo', toDo)
