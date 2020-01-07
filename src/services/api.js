@@ -22,7 +22,46 @@ async function getRequest (url) {
   }
 }
 
+async function apiRequest ({ url, method = 'POST', payload = null }) {
+  const options = {
+    method: method,
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  if (payload) options.body = JSON.stringify(payload)
+  try {
+    let response = await fetch(url, options)
+    response = checkStatusCode(response)
+    return await response.json()
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+
 export const getToDos = () => {
   const url = `${baseUrl}/${BASE_PATH_NAME}/todo`
   return getRequest(url)
+}
+
+export const createToDo = toDo => {
+  const url = `${baseUrl}/${BASE_PATH_NAME}/todo`
+  return apiRequest({ url, payload: toDo })
+}
+
+export const editToDo = toDo => {
+  const url = `${baseUrl}/${BASE_PATH_NAME}/todo/${toDo.id}`
+  const { title, description, done } = toDo
+  return apiRequest({
+    url,
+    method: 'PUT',
+    payload: { title, description, done }
+  })
+}
+
+export const deleteToDo = toDoId => {
+  const url = `${baseUrl}/${BASE_PATH_NAME}/todo/${toDoId}`
+  return apiRequest({ url, method: 'DELETE' })
 }

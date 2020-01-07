@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getToDos } from '@/services/api'
+import { getToDos, createToDo, editToDo, deleteToDo } from '@/services/api'
 
 Vue.use(Vuex)
 
@@ -31,7 +31,7 @@ export default new Vuex.Store({
       }, 0)
       state.toDos.push({ ...toDo, id: nextId })
     },
-    setToDo: (state, toDo) => {
+    setToDos: (state, toDo) => {
       const toDoIndex = state.toDos.reduce((acc, el, index) => {
         if (el.id === toDo.id) acc = index
         return acc
@@ -41,7 +41,6 @@ export default new Vuex.Store({
         .concat(toDo)
         .concat(state.toDos.slice(toDoIndex + 1))
     },
-    setToDos: (state, toDos) => (state.toDos = toDos),
     setDeleteToDo: (state, id) => {
       state.toDos = state.toDos.filter(toDo => toDo.id !== id)
     }
@@ -61,14 +60,33 @@ export default new Vuex.Store({
         console.error(`We couldn't fetch the to-dos. Error: ${err}`)
       }
     },
-    addToDo: ({ commit }, toDo) => {
-      commit('setNewToDo', toDo)
+    addToDo: async ({ commit, dispatch }, toDo) => {
+      try {
+        await createToDo(toDo)
+        dispatch('fetchToDos')
+      } catch (err) {
+        console.error(`We couldn't create the to-do. Error: ${err}`)
+      }
     },
-    editToDo: ({ commit }, toDo) => {
-      commit('setToDo', toDo)
+    editToDo: async ({ commit, dispatch }, toDo) => {
+      try {
+        await editToDo(toDo)
+        dispatch('fetchToDos')
+      } catch (err) {
+        console.error(
+          `We couldn't edit the to-do with id ${toDo.id}. Error: ${err}`
+        )
+      }
     },
-    deleteToDo: ({ commit }, id) => {
-      commit('setDeleteToDo', id)
+    deleteToDo: async ({ commit, dispatch }, toDoId) => {
+      try {
+        await deleteToDo(toDoId)
+        dispatch('fetchToDos')
+      } catch (err) {
+        console.error(
+          `We couldn't delete the to-do with id ${toDoId}. Error: ${err}`
+        )
+      }
     }
   }
 })
