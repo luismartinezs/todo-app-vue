@@ -1,6 +1,6 @@
 describe('To-Do app', () => {
   it('Create a to-do', () => {
-    const url = 'http://localhost:8081'
+    const url = 'http://localhost:8080'
 
     cy.visit(url)
     cy.get('#addToDoBtn').click()
