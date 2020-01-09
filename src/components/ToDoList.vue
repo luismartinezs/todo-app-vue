@@ -1,5 +1,5 @@
 <template>
-  <ul class="d-flex flex-column justify-content-center align-items-center w-100">
+  <ul id="toDoList" class="d-flex flex-column justify-content-center align-items-center w-100">
     <to-do-item
       v-for="toDo in toDos"
       :key="toDo.id"
@@ -14,11 +14,24 @@ import ToDoItem from './ToDoItem'
 
 export default {
   name: 'ToDoList',
+  data () {
+    return {
+      toDos: []
+    }
+  },
   components: {
     ToDoItem
   },
   computed: {
-    ...mapGetters({ toDos: 'getToDosOrderedById' })
+    ...mapGetters({ currentToDos: 'getToDosOrderedById' })
+  },
+  watch: {
+    currentToDos: function () {
+      this.toDos = this.currentToDos
+    }
+  },
+  mounted () {
+    this.toDos = this.currentToDos
   }
 }
 </script>
