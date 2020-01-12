@@ -18,7 +18,7 @@ export default {
     ToDoItem
   },
   computed: {
-    ...mapGetters({ toDos: 'getToDos' })
+    ...mapGetters({ toDos: 'getToDosOrderedById' })
   }
 }
 </script>

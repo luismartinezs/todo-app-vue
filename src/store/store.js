@@ -11,7 +11,9 @@ export default new Vuex.Store({
   },
   getters: {
     getToDos: state => state.toDos,
-    getToDosCount: state => state.toDos.length
+    getToDosCount: state => state.toDos.length,
+    getToDoById: (state) => (id) => state.toDos.find(toDo => toDo.id === id),
+    getToDosOrderedById: (state) => state.toDos.sort((a, b) => a.id - b.id)
   },
   mutations: {
     setToDoStatus: (state, { id, done }) => {
@@ -31,23 +33,25 @@ export default new Vuex.Store({
       }, 0)
       state.toDos.push({ ...toDo, id: nextId })
     },
-    setToDos: (state, toDo) => {
-      const toDoIndex = state.toDos.reduce((acc, el, index) => {
-        if (el.id === toDo.id) acc = index
-        return acc
-      }, null)
-      state.toDos = state.toDos
-        .slice(0, toDoIndex)
-        .concat(toDo)
-        .concat(state.toDos.slice(toDoIndex + 1))
+    setToDos: (state, toDos) => {
+      state.toDos = toDos
     },
     setDeleteToDo: (state, id) => {
       state.toDos = state.toDos.filter(toDo => toDo.id !== id)
     }
   },
   actions: {
-    toggleToDoStatus: ({ commit, getters }, { id, done }) => {
-      commit('setToDoStatus', { id, done: !done })
+    toggleToDoStatus: async ({ commit, dispatch, getters }, { id, done }) => {
+      const toDo = getters.getToDoById(id)
+      toDo.done = done
+      try {
+        await editToDo(toDo)
+        dispatch('fetchToDos')
+      } catch (err) {
+        console.error(
+          `We couldn't edit the to-do with id ${toDo.id}. Error: ${err}`
+        )
+      }
     },
     toggleShowAddToDo: ({ commit }) => {
       commit('setShowAddToDo')

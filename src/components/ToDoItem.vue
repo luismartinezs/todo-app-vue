@@ -61,7 +61,7 @@ export default {
   methods: {
     ...mapActions(['toggleToDoStatus', 'deleteToDo']),
     handleCheckboxClick () {
-      this.toggleToDoStatus({ id: this.toDo.id, done: this.toDo.done })
+      this.toggleToDoStatus({ id: this.toDo.id, done: !this.toDo.done })
     },
     handleDelete () {
       this.deleteToDo(this.toDo.id)
