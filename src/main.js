@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from '@/store/store.js'
+import router from '@/router.js'
 import BootstrapVue from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEdit, faTrashAlt, faCheck } from '@fortawesome/free-solid-svg-icons'
@@ -18,5 +19,6 @@ Vue.config.productionTip = false
 
 new Vue({
   store,
+  router,
   render: h => h(App)
 }).$mount('#app')

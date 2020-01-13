@@ -8,7 +8,7 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto mr-3">
+        <b-navbar-nav class="ml-auto mr-3 py-3 pl-3">
             <!-- Using 'button-content' slot -->
             <span class="header__login">Login</span>
         </b-navbar-nav>
