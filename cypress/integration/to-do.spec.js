@@ -15,6 +15,8 @@ describe('To-Do app', () => {
     cy.get('.todo__checkmark').should('not.be.visible')
     cy.get('#toDoList > li:last-child .todo__checkbox').click()
     cy.get('#toDoList > li:last-child .todo__checkmark').should('be.visible')
+    cy.reload()
+    cy.get('#toDoList > li:last-child .todo__checkmark').should('be.visible')
     cy.get('#toDoList > li:last-child .todo__checkbox').click()
     cy.get('#toDoList > li:last-child .todo__checkmark').should(
       'not.be.visible'
