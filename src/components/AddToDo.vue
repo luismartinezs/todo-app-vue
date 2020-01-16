@@ -13,12 +13,12 @@
         ></b-form-input>
       </b-form-group>
       <b-form-group id="input-group-2" label="Description:" label-for="input-2">
-        <b-form-input
+        <b-form-textarea
           id="input-2"
           v-model="toDo.description"
-          type="text"
           placeholder="Enter description (optional)"
-        ></b-form-input>
+          rows="3"
+        ></b-form-textarea>
       </b-form-group>
       <div class="d-flex justify-content-end">
         <b-button type="reset" variant="danger" class="mr-1">Cancel</b-button>
