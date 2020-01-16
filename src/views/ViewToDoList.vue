@@ -2,7 +2,7 @@
   <div class="w-100">
     <to-do-list />
     <div
-      v-show="!showAddToDo"
+      v-if="!showAddToDo"
       class="d-flex flex-column justify-content-center align-items-center"
     >
       <div v-show="toDosCount === 0">Add a new task</div>
