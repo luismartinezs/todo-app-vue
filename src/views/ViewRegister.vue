@@ -3,6 +3,7 @@
     class="d-flex align-items-center justify-content-between px-4 py-3 mb-2 w-100 login-form"
   >
     <b-form @submit.prevent="onSubmit" @reset.prevent="onReset" class="w-100">
+    <h1>Register</h1>
       <b-form-group id="input-group-1" label="User:" label-for="input-1">
         <b-form-input
           id="input-1"
@@ -35,7 +36,7 @@
 </template>
 
 <script>
-import { loginWithCredentials } from '@/services/api'
+import { handleRegistration } from '@/services/api'
 
 export default {
   name: 'ViewLogin',
@@ -47,8 +48,7 @@ export default {
   },
   methods: {
     async onSubmit () {
-      console.log('Login attempt')
-      await loginWithCredentials({
+      await handleRegistration({
         email: this.username,
         password: this.password
       })

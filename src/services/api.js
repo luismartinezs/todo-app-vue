@@ -65,3 +65,13 @@ export const deleteToDo = toDoId => {
   const url = `${baseUrl}/${BASE_PATH_NAME}/todo/${toDoId}`
   return apiRequest({ url, method: 'DELETE' })
 }
+
+export const loginWithCredentials = ({ email, password }) => {
+  const url = `${baseUrl}/${BASE_PATH_NAME}/login`
+  return apiRequest({ url, payload: { email, password } })
+}
+
+export const handleRegistration = ({ email, password }) => {
+  const url = `${baseUrl}/${BASE_PATH_NAME}/register`
+  return apiRequest({ url, payload: { email, password } })
+}
