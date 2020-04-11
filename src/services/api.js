@@ -8,18 +8,13 @@ const checkStatusCode = response => {
   if ([400, 401, 403, 404].includes(response.status)) {
     throw new Error(response.status)
   }
-  throw new Error('other')
+  throw new Error('Unexpected error')
 }
 
 async function getRequest (url) {
-  try {
-    let response = await fetch(url)
-    response = checkStatusCode(response)
-    return await response.json()
-  } catch (error) {
-    console.error(error)
-    throw error
-  }
+  let response = await fetch(url)
+  response = checkStatusCode(response)
+  return response.json()
 }
 
 async function apiRequest ({ url, method = 'POST', payload = null }) {
@@ -31,14 +26,9 @@ async function apiRequest ({ url, method = 'POST', payload = null }) {
     }
   }
   if (payload) options.body = JSON.stringify(payload)
-  try {
-    let response = await fetch(url, options)
-    response = checkStatusCode(response)
-    return await response.json()
-  } catch (error) {
-    console.error(error)
-    throw error
-  }
+  let response = await fetch(url, options)
+  response = checkStatusCode(response)
+  return response.json()
 }
 
 export const getToDos = () => {

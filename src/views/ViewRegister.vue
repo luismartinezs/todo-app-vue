@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-flex align-items-center justify-content-between px-4 py-3 mb-2 w-100 login-form"
+    class="d-flex flex-column align-items-center justify-content-between px-4 py-3 mb-2 w-100 login-form"
   >
     <b-form @submit.prevent="onSubmit" @reset.prevent="onReset" class="w-100">
       <b-form-group id="input-group-1" label="Email:" label-for="emailInput">
@@ -12,7 +12,11 @@
           placeholder="Enter your email"
         ></b-form-input>
       </b-form-group>
-      <b-form-group id="input-group-2" label="Password:" label-for="passwordInput">
+      <b-form-group
+        id="input-group-2"
+        label="Password:"
+        label-for="passwordInput"
+      >
         <b-form-input
           id="passwordInput"
           v-model="password"
@@ -31,6 +35,10 @@
         >
       </div>
     </b-form>
+    <p v-show="triedRegistration" class="mt-4">
+      <span class="text-danger" v-show="!couldRegister">Unable to register!</span>
+      <span class="text-success" v-show="couldRegister">Registration successful!</span>
+    </p>
   </div>
 </template>
 
@@ -38,19 +46,28 @@
 import { handleRegistration } from '@/services/api'
 
 export default {
-  name: 'ViewLogin',
+  name: 'ViewRegister',
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      triedRegistration: false,
+      couldRegister: false
     }
   },
   methods: {
     async onSubmit () {
-      await handleRegistration({
-        email: this.username,
-        password: this.password
-      })
+      try {
+        await handleRegistration({
+          email: this.username,
+          password: this.password
+        })
+        this.registerStatus = true
+      } catch (err) {
+        this.registerStatus = false
+      } finally {
+        this.triedRegistration = true
+      }
     }
   }
 }
