@@ -3,19 +3,18 @@
     class="d-flex align-items-center justify-content-between px-4 py-3 mb-2 w-100 login-form"
   >
     <b-form @submit.prevent="onSubmit" @reset.prevent="onReset" class="w-100">
-    <h1>Register</h1>
-      <b-form-group id="input-group-1" label="User:" label-for="input-1">
+      <b-form-group id="input-group-1" label="Email:" label-for="emailInput">
         <b-form-input
-          id="input-1"
+          id="emailInput"
           v-model="username"
           type="text"
           required
-          placeholder="Enter your user name"
+          placeholder="Enter your email"
         ></b-form-input>
       </b-form-group>
-      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
+      <b-form-group id="input-group-2" label="Password:" label-for="passwordInput">
         <b-form-input
-          id="input-2"
+          id="passwordInput"
           v-model="password"
           type="text"
           required
@@ -24,7 +23,7 @@
       </b-form-group>
       <div class="d-flex justify-content-end">
         <b-button
-          id="okButton"
+          id="registerSubmitButton"
           type="submit"
           variant="primary"
           @click.prevent="onSubmit"

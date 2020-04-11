@@ -7,13 +7,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     toDos: [],
-    showAddToDo: false
+    showAddToDo: false,
+    loggedIn: false
   },
   getters: {
     getToDos: state => state.toDos,
     getToDosCount: state => state.toDos.length,
-    getToDoById: (state) => (id) => state.toDos.find(toDo => toDo.id === id),
-    getToDosOrderedById: (state) => state.toDos.sort((a, b) => a.id - b.id)
+    getToDoById: state => id => state.toDos.find(toDo => toDo.id === id),
+    getToDosOrderedById: state => state.toDos.sort((a, b) => a.id - b.id)
   },
   mutations: {
     setToDoStatus: (state, { id, done }) => {
